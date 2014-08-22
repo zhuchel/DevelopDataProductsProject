@@ -39,7 +39,7 @@ Some examples of Text Mining:
 This application is based on the *Project Gutenberg* library containing complete works of William Shakespeare. App uses only some of the Shakespeare's work and contains most simple operation in the Text Mining domains for demonstration purposes.
 ### Features:
 
-- Calculation of most frequent terms in a selected document.
+- Calculation of most frequent terms in a selected document
 
 - Plotting of term's frequency histogram
 
