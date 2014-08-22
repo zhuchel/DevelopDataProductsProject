@@ -45,7 +45,7 @@ This application is based on the *Project Gutenberg* library containing complete
 
 - Visualisation in a Word Cloud format
 
-- Tenable minimal frequency tolerance
+- Tunable minimal frequency tolerance
 
 - Customizable **Word Cloud** plots allows selection between Black/White and Color mode
 
