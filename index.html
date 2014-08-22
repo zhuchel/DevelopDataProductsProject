@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shakespeare Text Mining</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Shakespeare Text Mining">
+  <meta name="author" content="">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/codefont.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Shakespeare Text Mining</h1>
+    <h2>Developing Data Products. Course Project</h2>
+    <p><br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Text Mining in Data Science</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>One of the important topic in the Data science area is the <strong>Text Mining</strong>. </p>
+
+<p>Some examples of Text Mining:</p>
+
+<ol>
+<li><p>Extracting Product Features and Opinions from Reviews published on Internet</p></li>
+<li><p>Extracting Relations from Text</p></li>
+<li><p>Identifying Text-Types to Measure the Cohesion of Text Structures</p></li>
+<li><p>Automatic Document Separation</p></li>
+</ol>
+
+<h3>Important related techniques:</h3>
+
+<ul>
+<li><p>Natural Language Processing</p></li>
+<li><p>Quantitative Linguistics</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Shakespeare Text Mining</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This application is based on the <em>Project Gutenberg</em> library containing complete works of William Shakespeare. App uses only some of the Shakespeare&#39;s work and contains most simple operation in the Text Mining domains for demonstration purposes.</p>
+
+<h3>Features:</h3>
+
+<ul>
+<li><p>Calculation of most frequent terms in a selected document.</p></li>
+<li><p>Plotting of term&#39;s frequency histogram</p></li>
+<li><p>Visualisation in a Word Cloud format</p></li>
+<li><p>Tenable minimal frequency tolerance</p></li>
+<li><p>Customizable <strong>Word Cloud</strong> plots allows selection between Black/White and Color mode</p></li>
+<li><p>Automatic plots update on document selection during document context switch</p></li>
+<li><p>User documentation</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Application view</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Application link: <a href="http://zhuchel.shinyapps.io/DevelopDataProducts"> Shakespeare Text Mining</a> </p>
+
+<p><img src="pic.jpg" alt="./pic.gpg" height="540" width="700"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="codefont" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Document Term Matrix</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(tm)
+text &lt;- readLines(paste0(&quot;texts/&quot;, &quot;A MIDSUMMER NIGHT&#39;S DREAM.txt&quot;),encoding=&quot;UTF-8&quot;)
+docs &lt;- VCorpus(VectorSource(text))
+docs &lt;- tm_map(docs, tolower)       # to lower case
+docs &lt;- tm_map(docs, removeNumbers) # remove numbers
+docs &lt;- tm_map(docs, removePunctuation) # remove punctuation
+docs &lt;- tm_map(docs, removeWords, stopwords(&quot;english&quot;)) # remove stop words
+docs &lt;- tm_map(docs, stripWhitespace)
+docs &lt;- tm_map(docs, PlainTextDocument)
+dtm &lt;- DocumentTermMatrix(docs)  
+freq &lt;- sort(colSums(as.matrix(dtm)), decreasing=TRUE) 
+wf &lt;- data.frame(word=names(freq), freq=freq)
+wf1 &lt;- cbind(wf, wf$freq / nTerms(dtm) * 20)
+colnames(wf1) &lt;- c(&quot;word&quot;, &quot;freq&quot;, &quot;total occurrence, %&quot;)
+head(wf1)  
+</code></pre>
+
+<pre><code>##                word freq total occurrence, %
+## will           will  119              0.8204
+## thou           thou  116              0.7997
+## love           love  103              0.7101
+## demetrius demetrius  100              0.6894
+## lysander   lysander   99              0.6825
+## hermia       hermia   97              0.6687
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Text Mining in Data Science'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Shakespeare Text Mining'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Application view'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Document Term Matrix'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
