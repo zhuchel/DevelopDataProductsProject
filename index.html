@@ -121,18 +121,18 @@ docs &lt;- tm_map(docs, PlainTextDocument)
 dtm &lt;- DocumentTermMatrix(docs)  
 freq &lt;- sort(colSums(as.matrix(dtm)), decreasing=TRUE) 
 wf &lt;- data.frame(word=names(freq), freq=freq)
-wf1 &lt;- cbind(wf, wf$freq / nTerms(dtm) * 20)
+wf1 &lt;- cbind(wf, wf$freq / nTerms(dtm) * 100)
 colnames(wf1) &lt;- c(&quot;word&quot;, &quot;freq&quot;, &quot;total occurrence, %&quot;)
 head(wf1)  
 </code></pre>
 
 <pre><code>##                word freq total occurrence, %
-## will           will  119              0.8204
-## thou           thou  116              0.7997
-## love           love  103              0.7101
-## demetrius demetrius  100              0.6894
-## lysander   lysander   99              0.6825
-## hermia       hermia   97              0.6687
+## will           will  119               4.102
+## thou           thou  116               3.999
+## love           love  103               3.550
+## demetrius demetrius  100               3.447
+## lysander   lysander   99               3.413
+## hermia       hermia   97               3.344
 </code></pre>
 
   </article>

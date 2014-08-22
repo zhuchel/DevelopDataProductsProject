@@ -91,19 +91,19 @@ docs <- tm_map(docs, PlainTextDocument)
 dtm <- DocumentTermMatrix(docs)  
 freq <- sort(colSums(as.matrix(dtm)), decreasing=TRUE) 
 wf <- data.frame(word=names(freq), freq=freq)
-wf1 <- cbind(wf, wf$freq / nTerms(dtm) * 20)
+wf1 <- cbind(wf, wf$freq / nTerms(dtm) * 100)
 colnames(wf1) <- c("word", "freq", "total occurrence, %")
 head(wf1)  
 ```
 
 ```
 ##                word freq total occurrence, %
-## will           will  119              0.8204
-## thou           thou  116              0.7997
-## love           love  103              0.7101
-## demetrius demetrius  100              0.6894
-## lysander   lysander   99              0.6825
-## hermia       hermia   97              0.6687
+## will           will  119               4.102
+## thou           thou  116               3.999
+## love           love  103               3.550
+## demetrius demetrius  100               3.447
+## lysander   lysander   99               3.413
+## hermia       hermia   97               3.344
 ```
 
 
